@@ -1,4 +1,4 @@
-import { TiktokDL } from './lib/ttdl.js'
+import { TiktokDL } from './lib/ttapi.js'
 import { ReelsUpload } from './lib/browserHandler.js'
 import axios from 'axios'
 import ProgressBar from 'progress'
