@@ -14,5 +14,7 @@ Tiktok downloader &amp; auto upload to reels facebook (with puppeteer).
 
 > install module using command "npm install"
 
-Note: before running the script, change the target tiktok url in the index.js file (line 10)
-> run script "node index.js"
+Note: Input link tiktok like here 
+
+<img width="338" alt="image" src="https://github.com/dinarsanjaya/tiktok-src/assets/34889287/10efe135-4183-48d8-b801-9aa9fce25750">
+
