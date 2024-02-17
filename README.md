@@ -18,3 +18,12 @@ Note: Input link tiktok like here
 
 <img width="338" alt="image" src="https://github.com/dinarsanjaya/tiktok-src/assets/34889287/10efe135-4183-48d8-b801-9aa9fce25750">
 
+
+## Telegram Bot feature (Optional)
+> To connect to Telegram Bot chat, you must first create a bot in ["BotFather"](https://t.me/BotFather).
+
+> then copy the token from BotFather into the config.json file
+
+> run the bot in the terminal with the command "node telebot.js"
+
+> paste your tiktok video url into the telegram bot that you have created.
