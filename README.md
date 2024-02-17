@@ -27,3 +27,6 @@ Note: Input link tiktok like here
 > run the bot in the terminal with the command "node telebot.js"
 
 > paste your tiktok video url into the telegram bot that you have created.
+
+![image](https://github.com/wahdalo/tiktok-src/assets/50321468/70ddc312-f66b-4a60-a134-388f43c9e0ca)
+
