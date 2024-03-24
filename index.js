@@ -9,11 +9,11 @@ import readlineSync from 'readline-sync'
 
 async function downloadAndUpload(url) {
   try {
+    console.log(`Scrape data tiktok, Please wait..`);
     const result = await TiktokDL(url)
     const video = result.result.video[0]
     const namafile = result.result.id
     const caption = result.result.description
-
     if (fs.existsSync(path.resolve('download', `${namafile}.mp4`))) {
       console.log(`[ ${chalk.hex('#f12711')(namafile)} already downloaded! ] ===== [${chalk.hex('#7F7FD5')('skipped')}]`);
       // await ReelsUpload(namafile, caption)
