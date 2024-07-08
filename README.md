@@ -25,8 +25,6 @@ Tiktok downloader & auto upload to Reels Facebook (with Puppeteer).
 3. Jalankan bot di terminal dengan perintah `node telebot.js`.
 4. Tempelkan URL video Tiktok Anda ke dalam bot Telegram yang telah Anda buat.
 
-![image](https://github-production-user-asset-6210df.s3.amazonaws.com/50321468/305666905-70ddc312-f66b-4a60-a134-388f43c9e0ca.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240708%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240708T094408Z&X-Amz-Expires=300&X-Amz-Signature=7d8e1f9ce43c0cab4b4176aef135fc64f8a2a97acf3dfee39eda8d542659a392&X-Amz-SignedHeaders=host&actor_id=116486225&key_id=0&repo_id=680561492)
-
 ---
 
 ## Berkontribusi ke Proyek
