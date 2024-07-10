@@ -11,9 +11,14 @@ import Queue from 'better-queue'
 
 // Fungsi untuk memilih kualitas video
 function chooseVideoQuality(videos) {
+  if (!videos || videos.length === 0) {
+    console.log('No video qualities available. Using default.');
+    return videos[0];
+  }
+
   console.log('Available video qualities:')
   videos.forEach((video, index) => {
-    console.log(`${index + 1}. ${video.quality}`)
+    console.log(`${index + 1}. ${video.quality || 'Unknown quality'}`)
   })
   const choice = readlineSync.questionInt('Choose video quality (enter number): ', {
     min: 1,
@@ -41,12 +46,23 @@ function convertVideo(inputPath, outputPath, format) {
 
 async function downloadAndUpload(url, retries = 3) {
   try {
-    console.log(`Scrape data tiktok, Please wait..`)
+    console.log(`Scraping data from TikTok, please wait...`)
     const result = await TiktokDL(url)
-    const videos = result.result.video
-    const video = chooseVideoQuality(videos)
-    const namafile = result.result.id
-    const caption = result.result.description
+    console.log('TiktokDL result:', JSON.stringify(result, null, 2));
+
+    if (!result.result || !result.result.video || result.result.video.length === 0) {
+      console.log('No video data available. Please check the URL or try again.');
+      return;
+    }
+
+    const video = chooseVideoQuality(result.result.video)
+    if (!video || !video.url) {
+      console.log('Invalid video data. Please check the URL or try again.');
+      return;
+    }
+
+    const namafile = result.result.id || 'unknown'
+    const caption = result.result.description || ''
     const downloadPath = path.resolve('download', `${namafile}.mp4`)
 
     if (fs.existsSync(downloadPath)) {
@@ -59,7 +75,7 @@ async function downloadAndUpload(url, retries = 3) {
       }).then(async ({ data, headers }) => {
         if (!fs.existsSync('download')) fs.mkdirSync('download')
         const totalLength = headers['content-length']
-        const progressBar = new ProgressBar(`[ ${chalk.hex('#ffff1c')("Proses Download")} ] [${chalk.hex('#6be585')(':bar')}] :percent downloaded in :elapseds`, {
+        const progressBar = new ProgressBar(`[ ${chalk.hex('#ffff1c')("Downloading")} ] [${chalk.hex('#6be585')(':bar')}] :percent in :elapseds`, {
           width: 40,
           complete: '<',
           incomplete: '•',
@@ -74,15 +90,24 @@ async function downloadAndUpload(url, retries = 3) {
         data.on('end', async () => {
           console.log(`Download completed: ${namafile}`)
           
-          // Simpan metadata
+          // Save metadata
           saveMetadata(result.result, path.resolve('download', `${namafile}_metadata.json`))
           
-          // Konversi video (contoh ke format webm)
+          // Convert video (example to webm format)
           const webmPath = path.resolve('download', `${namafile}.webm`)
-          await convertVideo(downloadPath, webmPath, 'webm')
-          console.log(`Video converted to WebM: ${webmPath}`)
+          try {
+            await convertVideo(downloadPath, webmPath, 'webm')
+            console.log(`Video converted to WebM: ${webmPath}`)
+          } catch (error) {
+            console.log(`Error converting video: ${error.message}`)
+          }
           
-          await ReelsUpload(namafile, caption)
+          try {
+            await ReelsUpload(namafile, caption)
+            console.log(`Video uploaded successfully: ${namafile}`)
+          } catch (error) {
+            console.log(`Error uploading video: ${error.message}`)
+          }
         })
       })
     }
@@ -106,9 +131,12 @@ const downloadQueue = new Queue(async (task, cb) => {
 function processUrlList(filePath) {
   const urls = fs.readFileSync(filePath, 'utf8').split('\n')
   for (const url of urls) {
-    if (url) downloadQueue.push({ url: url.trim() })
+    if (url.trim()) downloadQueue.push({ url: url.trim() })
   }
 }
+
+console.log(chalk.blue('TikTok Downloader and Uploader'))
+console.log(chalk.green('================================'))
 
 const choice = readlineSync.question('Do you want to enter a single URL or a list of URLs? (single/list): ')
 
@@ -121,3 +149,7 @@ if (choice.toLowerCase() === 'single') {
 } else {
   console.log('Invalid input. Please enter "single" or "list".')
 }
+
+downloadQueue.on('drain', () => {
+  console.log(chalk.green('All tasks completed!'))
+})
