@@ -25,6 +25,8 @@
     "progress": "^2.0.3",
     "puppeteer": "^21.0.3",
     "readline-sync": "^1.4.10",
-    "telebot": "^1.4.1"
+    "telebot": "^1.4.1",
+    "better-queue": "^3.8.10",
+    "fluent-ffmpeg": "^2.1.2"
   }
 }
