@@ -1,6 +1,7 @@
-# tiktok-src
+<h1 align="center">Welcome to tiktok-src! 👋 </h1>
 
-Tiktok downloader & auto upload to Facebook Reels (using Puppeteer).
+
+<p align="center">Tiktok downloader & auto upload to Facebook Reels (using Puppeteer). </p>
 
 ## Features
 
