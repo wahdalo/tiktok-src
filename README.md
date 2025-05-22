@@ -1,18 +1,16 @@
 # tiktok-src
-Tiktok downloader &amp; auto upload to reels facebook (with puppeteer).
+A command-line tool to download TikTok videos.
 
 ## Install
-> Access facebook web (please login first)
+> Clone this repo: `git clone https://github.com/wahdalo/tiktok-src.git`
 
-> Export your cookies using the extension ["Export cookies JSON file for Puppeteer"](https://chrome.google.com/webstore/detail/%E3%82%AF%E3%83%83%E3%82%AD%E3%83%BCjson%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%87%BA%E5%8A%9B-for-puppet/nmckokihipjgplolmcmjakknndddifde)
+> Open directory from this repo: `cd tiktok-src`
 
-> Clone this repo: https://github.com/wahdalo/tiktok-src
+> Install modules using command: `npm install`
 
-> Open directory from this repo
+## Usage
+To download a TikTok video, run the script with the TikTok URL as a command-line argument:
+`node index.js <tiktok_url>`
 
-> replace the cookies.json file with the exported file from extension
-
-> install module using command "npm install"
-
-Note: before running the script, change the target tiktok url in the index.js file (line 10)
-> run script "node index.js"
+Example:
+`node index.js https://www.tiktok.com/@username/video/1234567890123456789`
